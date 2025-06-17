@@ -6,7 +6,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import type { SignupFormValues, SignupInput, ApiResponse } from "@/app/types/auth";
-import { GRAPHQL_MUTATIONS } from "@/config/api";
+import { API_CONFIG, GRAPHQL_MUTATIONS } from "@/config/api";
 
 
 export default function SignupPage() {
@@ -31,9 +31,9 @@ export default function SignupPage() {
   const onSubmit: SubmitHandler<SignupFormValues> = async (data) => {
     setIsLoading(true);
     setResponseMsg("");
-
+    const apiUrl = API_CONFIG.GRAPHQL_URL;
     try {
-      const response = await fetch("http://localhost:4000/graphql", {
+      const response = await fetch(apiUrl!, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
